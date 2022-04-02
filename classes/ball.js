@@ -6,6 +6,7 @@ class Ball {
         this.ball=null; 
         this.positionY=195;
         this.playerSize = {w: 50, h: 50 };
+        this.gameSize = {w:600, h:900}
         this.playerSpeed  = {x:this.getRandVelocity(),
                              y:this.getRandVelocity(),};
         this.load()
@@ -21,7 +22,7 @@ class Ball {
         return velocity[Math.floor(Math.random()*2)]*(Math.random()*2);
     }
     draw(){
-       // this.ball.onload = function (){
+      
             this.ctx.drawImage(
                 this.ball,
                 this.positionX,
@@ -29,28 +30,32 @@ class Ball {
                 this.playerSize.w,
                 this.playerSize.h
             )
-       // }
+       
     }
     randomMove(){
-        console.log('changing ball position')
+       // console.log('changing ball position')
         this.positionX += this.playerSpeed.x;
         this.positionY -= this.playerSpeed.y;
-       // this.checkCollision()
+        this.checkCollision()
     }
-    // checkCollision() {
-	// 	if (this.horizontallyOutOfBound()) {
-	// 		this.playerSpeed.x *= -1;
-	// 	}
+    checkCollision() {
+		if (this.horizontallyOutOfBound()) {
+			this.playerSpeed.x *= -1;
+		}
 
-	// 	if (this.verticallyOutOfBound()) {
-	// 		this.playerSpeed.y *= -1;
-	// 	}
-	// }
+		if (this.verticallyOutOfBound()) {
+			this.playerSpeed.y *= -1;
+		}
+	}
 
-	// horizontallyOutOfBound() {
-	// 	return (
-	// 		this.playerPos.x + this.playerSize.w > this.gameSize.w ||
-	// 		this.playerPos.x < 0
-	// 	);
-	// }
+	horizontallyOutOfBound() {
+		return (
+			this.positionX + this.playerSize.w > this.gameSize.w ||
+			this.positionX < 0
+		);
+	}
+    verticallyOutOfBound(){
+        return ( this.positionY<72 ||
+                 this.positionY + this.playerSize.h >(this.gameSize.h-73));
+    }
 }
