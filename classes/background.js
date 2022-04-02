@@ -4,7 +4,7 @@ class Background{
      this.ctx = ctx;
      this.image = null;
 
-     
+     this.loadBackground()
  }
  
        
@@ -12,7 +12,7 @@ class Background{
     loadBackground(){
         
         this.image = new Image();
-        this.image.scr="resources/background.png";
+        this.image.src ="resources/background.png";
 
     }
 

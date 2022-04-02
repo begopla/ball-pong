@@ -13,7 +13,7 @@ class Players {
         this.playerPosY = 700;
         this.playerSize = {w:100 , h:50};
         this.playerImage= null;
-        this.playerSpeed = 4;
+        this.playerSpeed = 2;
         this.hasCollided = false;
         this.load()
     }

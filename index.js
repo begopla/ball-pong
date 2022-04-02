@@ -19,12 +19,11 @@ goBack.addEventListener("click",()=>{
     gameScreen.style.display = "none"    
 })
 //**Loading the canvas backgound which is fixed in the game */
-// //**we could create canvas in the Game class */
+
 
 let canvas = document.querySelector("#my-canvas");
 let ctx = canvas.getContext("2d");
  
-// //**TODO: this could be replaced by calling a class called Background */
  
     let image = new Image ();
     image.src = "./resources/background.png";

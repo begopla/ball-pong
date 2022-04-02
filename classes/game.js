@@ -18,7 +18,6 @@ class Game{
         console.log('game on')
         this.clearBackground()
         this.createOpponent()
-       // this.loadplayer()
         this.loadPlayers()
         this.moveAll()
         this.setEventHandlers()
@@ -29,8 +28,6 @@ class Game{
     
     clearBackground(){
         this.newBackground = new Background(this.canvas,this.ctx)
-        this.newBackground.loadBackground()
-        this.newBackground.draw();
     }
     createOpponent(){
         this.opponent = new Opponent(this.canvas,this.ctx,250)
