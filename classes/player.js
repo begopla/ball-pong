@@ -2,7 +2,7 @@ class Player{
     constructor(canvas,ctx, positionX){
         this.canvas = canvas;
         this.ctx = ctx;
-        this.playerPosX = positionX
+        this.playerPosX = positionX;
         this.playerImage= null;
         this.playerSpeed = 2;
     }
@@ -13,15 +13,18 @@ class Player{
     }
     draw(){
 
-          console.log('loading player')
-            this.ctx.drawImage(
-                this.playerImage,
-                this.playerPosX,
-                700,
-                100,
-                50
-                );
+        //   console.log('loading player')
+        //     this.ctx.drawImage(
+        //         this.playerImage,
+        //         this.playerPosX,
+        //         700,
+        //         100,
+        //         50
+        //         );
             
+
+        this.ctx.fillStyle = "red";
+        this.ctx.fillRect(this.playerPosX, 700, 100, 50);
              
          }
 
@@ -35,7 +38,7 @@ class Player{
            
          
     moveRight(){
-             if(this.playerPosX <550)
+             if(this.playerPosX <450)
              {
              this.playerPosX +=this.playerSpeed;
             }

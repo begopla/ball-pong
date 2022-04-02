@@ -28,8 +28,9 @@ class Opponent {
             }
 
         }
-        // clearOpponent (){
-        //     this.ctx.clearRect(this.positionX, 150, 100, 50)
-        // }
+        //**?how can I clear opponent keeping the backgrong  */
+        clearOpponent (){
+            this.ctx.clearRect(this.positionX, 150, 100, 50)
+         }
 }
 

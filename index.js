@@ -34,11 +34,14 @@ let ctx = canvas.getContext("2d");
     ball.src = "./resources/soccer-ball.png";
    //**here are all elements of the game */ 
     image.onload =function(){
-        console.log('image has been loaded')
+        console.log('background has been loaded')
         ctx.drawImage(image, 0,0,600,900);
         ctx.fillStyle = "blue";
         ctx.fillRect(250, 150, 100, 50);
-        ctx.drawImage(player, 250,700,100,50)
+        //ctx.drawImage(player, 250,700,100,50)
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(250, 700, 100, 50);
         ctx.drawImage(ball,275,195,50,50)
     }
   
@@ -46,7 +49,7 @@ let ctx = canvas.getContext("2d");
 //** Start the game on canvas by typing any key **/
 startGame.addEventListener("click", () =>{
    
-    new Game(ctx,canvas);  
+    new Game(canvas,ctx);  
 
 });    
 

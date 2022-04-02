@@ -30,39 +30,41 @@ class Game{
     clearBackground(){
         this.newBackground = new Background(this.canvas,this.ctx)
         this.newBackground.loadBackground()
+        this.newBackground.draw();
     }
     createOpponent(){
-        this.opponent = new Opponent(canvas,ctx,250)
+        this.opponent = new Opponent(this.canvas,this.ctx,250)
         this.opponent.createOpponent()
     }
     loadplayer(){
-        this.player= new Player(canvas,ctx,250)
-        this.player.init()
-        this.player.draw();
+        this.player= new Player(this.canvas,this.ctx,250)
+        //this.player.init()
+       
         console.log('player loaded!')
     }
 
     loadBall(){
-        this.ball = new Ball(canvas,ctx,275)
-        this.ball.draw()
+        this.ball = new Ball(this.canvas,this.ctx,275)
         console.log('ball loaded!')
 
     }
     moveAll(){
         
         this.frames ++;
-        //this.clear()
+        this.clear()
         this.newBackground.draw()
         this.opponent.createOpponent()
         this.opponent.orderedMove()
-        
-
+        //this.opponent.clearOpponent();
+        this.ball.randomMove();
+        this.ball.draw();
+        this.player.draw();
         this.intervalId = requestAnimationFrame(()=>this.moveAll())
     }
 
     setEventHandlers(){
     document.addEventListener('keydown', (event)=>{
-                    console.log(event);
+            //console.log(event);
             const key = event.key;
             key === "ArrowRight" ? this.player.moveRight(): null;
             key === "ArrowLeft" ? this.player.moveLeft(): null;
