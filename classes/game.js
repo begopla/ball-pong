@@ -41,7 +41,7 @@ class Game{
     // }
 
     loadPlayers(){
-        this.players = new Players (this.canvas,this.ctx,275, 250,250);
+        this.players = new Players (this.canvas,this.ctx,275, 250,250, this.frames);
     }
     moveAll(){
         
@@ -55,7 +55,6 @@ class Game{
         this.players.drawPlayer();
         this.intervalId = requestAnimationFrame(()=>this.moveAll())
     }
-
     setEventHandlers(){
     document.addEventListener('keydown', (event)=>{
             //console.log(event);

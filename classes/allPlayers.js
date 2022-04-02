@@ -1,5 +1,8 @@
+
+let opponentGoalCounter = document.getElementById('goalsOpponent');
+let playerGoalCounter = document.getElementById('goals')
 class Players {
-    constructor(canvas, ctx, positionX, playerPositionX,oppPosX){
+    constructor(canvas, ctx, positionX, playerPositionX,oppPosX, frames){
         this.canvas =canvas;
         this.ctx = ctx;
         this.ballPositionX  = positionX;
@@ -13,12 +16,15 @@ class Players {
         this.playerPosY = 700;
         this.playerSize = {w:100 , h:50};
         this.playerImage= null;
-        this.playerSpeed = 2;
+        this.playerSpeed = 4;
         this.opponentPositionX = oppPosX;
         this.opponentPositionY =150;
         this.opponentSpeed= 2;
         this.opponent=null;
         this.hasCollided = false;
+        this.playerGoals =0;
+        this.opponentGoals = 0;
+        this.frames = frames;
         this.load()
     }
 //**Ball functions */
@@ -30,7 +36,7 @@ class Players {
     }
 
     getRandVelocity(){
-        const velocity = [-2,2];
+        const velocity = [-4,2];
         return velocity[Math.floor(Math.random()*2)]*(Math.random()*2);
     }
     drawBall(){
@@ -56,14 +62,65 @@ class Players {
 		}}
 
 	horizontallyOutOfBound() {
-		return (
-			this.ballPositionX  + this.ballSize.w > this.gameSize.w ||
-			this.ballPositionX  < 0
-		);}
-    verticallyOutOfBound(){
-        return ( this.ballPositionY<72 ||
-                 this.ballPositionY + this.ballSize.h >(this.gameSize.h-73));
+        // let horizontallyOut = false;
+		// let ballbellowGoal = (this.ballPositionX  + this.ballSize.w) > this.gameSize.w/4 ||
+        // this.ballPositionX  < 0 ;
+        
+        // //let ballOverGoal = this.ballPositionX>this.gameSize.w/4 && (this.ballPositionX  + this.ballSize.w)<this.gameSize.w
+        // horizontallyOut = ballbellowGoal 
+        // //|| ballOverGoal
+        // return horizontallyOut
+        
+            let outOfAxisX =  this.ballPositionX  + this.ballSize.w > (this.gameSize.w) ||
+                this.ballPositionX  < 0;
+
+            return outOfAxisX;
+            
+        
     }
+    verticallyOutOfBound(){
+        
+       let outOfAxisY = this.ballPositionY<72 ||
+        this.ballPositionY + this.ballSize.h >(this.gameSize.h-73)
+
+         if(this.ballPositionX>0 && (this.ballPositionX+this.ballSize.w) <this.gameSize.w/3)
+         return outOfAxisY;
+
+        else if( this.ballPositionX>this.gameSize.w*(2/3) && (this.ballPositionX+this.ballSize.w)<this.gameSize.w)
+        return outOfAxisY;
+
+        else {
+            if(this.ballPositionY<=15){
+                
+                this.playerGoals ++;
+                playerGoalCounter.innerHTML = this.playerGoals;
+                
+                   this.ballPositionY = 300;
+                   this.ballPositionX = 250;
+                   this.playerPosX=250;
+                   this.playerPosY=700;
+                   this.opponentPositionX =250;
+                   this.opponentPositionY= 150;
+                   this.ballSpeed.x *= -1;
+                   this.ballSpeed.y *= -1;  
+            }
+            if(this.ballPositionY>this.gameSize.h-80 && this.ballPositionY<=this.gameSize.h-15){
+                this.opponentGoals ++;
+                opponentGoalCounter.innerHTML = this.opponentGoals;
+               
+                   this.ballPositionY = 300;
+                   this.ballPositionX = 250;
+                   this.playerPosX=250;
+                   this.playerPosY=700;
+                   this.opponentPositionX =250;
+                   this.opponentPositionY= 150;
+    
+            }
+
+        }
+    }
+
+    
 
 
  //*player functions*//
