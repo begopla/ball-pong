@@ -1,8 +1,8 @@
 class Player{
-    constructor(canvas,ctx, positionX){
+    constructor(canvas,ctx, playerPositionX){
         this.canvas = canvas;
         this.ctx = ctx;
-        this.playerPosX = positionX;
+        this.playerPosX = playerPositionX;
         this.playerImage= null;
         this.playerSpeed = 2;
     }

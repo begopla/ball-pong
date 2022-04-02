@@ -2,12 +2,12 @@ class Game{
     constructor(canvas,ctx){
         this.canvas = canvas;
         this.ctx = ctx;
-        this.player = null;
+        //this.player = null;
         this.intervalId = 0;
         this.playerImage=null;
         this.newBackground = null;
         this.opponent =null;
-        this.ball=null;
+        this.players=null;
         this.frames =0;
         this.intervalId = 0;
         this.init()
@@ -18,8 +18,8 @@ class Game{
         console.log('game on')
         this.clearBackground()
         this.createOpponent()
-        this.loadplayer()
-        this.loadBall()
+       // this.loadplayer()
+        this.loadPlayers()
         this.moveAll()
         this.setEventHandlers()
     }
@@ -36,15 +36,15 @@ class Game{
         this.opponent = new Opponent(this.canvas,this.ctx,250)
         this.opponent.createOpponent()
     }
-    loadplayer(){
-        this.player= new Player(this.canvas,this.ctx,250)
-        //this.player.init()
+    // loadplayer(){
+    //     this.player= new Player(this.canvas,this.ctx,250)
+    //     //this.player.init()
        
-        console.log('player loaded!')
-    }
+    //     console.log('player loaded!')
+    // }
 
-    loadBall(){
-        this.ball = new Ball(this.canvas,this.ctx,275)
+    loadPlayers(){
+        this.players = new Players (this.canvas,this.ctx,275, 250)
         console.log('ball loaded!')
 
     }
@@ -56,9 +56,9 @@ class Game{
         this.opponent.createOpponent()
         this.opponent.orderedMove()
         //this.opponent.clearOpponent();
-        this.ball.randomMove();
-        this.ball.draw();
-        this.player.draw();
+        this.players.randomMove();
+        this.players.drawBall();
+        this.players.drawPlayer();
         this.intervalId = requestAnimationFrame(()=>this.moveAll())
     }
 
@@ -66,8 +66,8 @@ class Game{
     document.addEventListener('keydown', (event)=>{
             //console.log(event);
             const key = event.key;
-            key === "ArrowRight" ? this.player.moveRight(): null;
-            key === "ArrowLeft" ? this.player.moveLeft(): null;
+            key === "ArrowRight" ? this.players.moveRight(): null;
+            key === "ArrowLeft" ? this.players.moveLeft(): null;
         })
     }
     clear(){
