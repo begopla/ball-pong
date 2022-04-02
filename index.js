@@ -37,10 +37,10 @@ let ctx = canvas.getContext("2d");
         ctx.drawImage(image, 0,0,600,900);
         ctx.fillStyle = "blue";
         ctx.fillRect(250, 150, 100, 50);
-        //ctx.drawImage(player, 250,700,100,50)
+        ctx.drawImage(player, 250,700,100,50)
 
-        ctx.fillStyle = "red";
-        ctx.fillRect(250, 700, 100, 50);
+        //ctx.fillStyle = "red";
+       // ctx.fillRect(250, 700, 100, 50);
         ctx.drawImage(ball,275,195,50,50)
     }
   

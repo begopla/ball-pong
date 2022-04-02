@@ -4,9 +4,9 @@ class Game{
         this.ctx = ctx;
         //this.player = null;
         this.intervalId = 0;
-        this.playerImage=null;
+        //this.playerImage=null;
         this.newBackground = null;
-        this.opponent =null;
+       // this.opponent =null;
         this.players=null;
         this.frames =0;
         this.intervalId = 0;
@@ -17,7 +17,7 @@ class Game{
         
         console.log('game on')
         this.clearBackground()
-        this.createOpponent()
+        //this.createOpponent()
         this.loadPlayers()
         this.moveAll()
         this.setEventHandlers()
@@ -29,10 +29,10 @@ class Game{
     clearBackground(){
         this.newBackground = new Background(this.canvas,this.ctx)
     }
-    createOpponent(){
-        this.opponent = new Opponent(this.canvas,this.ctx,250)
-        this.opponent.createOpponent()
-    }
+    // createOpponent(){
+    //     this.opponent = new Opponent(this.canvas,this.ctx,250)
+    //     this.opponent.createOpponent()
+    // }
     // loadplayer(){
     //     this.player= new Player(this.canvas,this.ctx,250)
     //     //this.player.init()
@@ -41,18 +41,15 @@ class Game{
     // }
 
     loadPlayers(){
-        this.players = new Players (this.canvas,this.ctx,275, 250)
-        console.log('ball loaded!')
-
+        this.players = new Players (this.canvas,this.ctx,275, 250,250);
     }
     moveAll(){
         
         this.frames ++;
-        this.clear()
-        this.newBackground.draw()
-        this.opponent.createOpponent()
-        this.opponent.orderedMove()
-        //this.opponent.clearOpponent();
+        this.clear();
+        this.newBackground.draw();
+        this.players.createOpponent();
+        this.players.opponentMove();
         this.players.randomMove();
         this.players.drawBall();
         this.players.drawPlayer();

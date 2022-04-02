@@ -1,19 +1,23 @@
 class Players {
-    constructor(canvas, ctx, positionX, playerPositionX){
+    constructor(canvas, ctx, positionX, playerPositionX,oppPosX){
         this.canvas =canvas;
         this.ctx = ctx;
         this.ballPositionX  = positionX;
         this.ball=null; 
-        this.ballPositionY =195;
+        this.ballPositionY =200;
         this.ballSize = {w: 50, h: 50 };
         this.gameSize = {w:600, h:900}
         this.ballSpeed  = {x:this.getRandVelocity(),
-                             y:this.getRandVelocity(),};
+                            y:this.getRandVelocity(),};
         this.playerPosX = playerPositionX;
         this.playerPosY = 700;
         this.playerSize = {w:100 , h:50};
         this.playerImage= null;
         this.playerSpeed = 2;
+        this.opponentPositionX = oppPosX;
+        this.opponentPositionY =150;
+        this.opponentSpeed= 2;
+        this.opponent=null;
         this.hasCollided = false;
         this.load()
     }
@@ -22,7 +26,7 @@ class Players {
         this.ball = new Image();
         this.ball.src = "./resources/soccer-ball.png";
         this.playerImage = new Image();
-        this.playerImage.scr = "./resources/player.png";
+        this.playerImage.src = "./resources/player.png";
     }
 
     getRandVelocity(){
@@ -62,33 +66,41 @@ class Players {
     }
 
 
-    //*player functions*//
+ //*player functions*//
     
     drawPlayer(){
-
-        //   console.log('loading player')
-        //     this.ctx.drawImage(
-        //         this.playerImage,
-        //         this.playerPosX,
-        //         700,
-        //         100,
-        //         50
-        //         );
-
-        this.ctx.fillStyle = "red";
-        this.ctx.fillRect(this.playerPosX, 700, 100, 50);
-         }
+    this.ctx.drawImage(
+        this.playerImage,
+        this.playerPosX,
+        this.playerPosY,
+        this.playerSize.w,
+        this.playerSize.h);
+        // this.ctx.fillStyle = "red";
+        // this.ctx.fillRect(this.playerPosX, 700, 100, 50);
+     }
      moveLeft(){
-            if(this.playerPosX>0){
-             this.playerPosX -=this.playerSpeed;
-            }}
+        if(this.playerPosX>0){
+        this.playerPosX -=this.playerSpeed; }}
               
     moveRight(){
-             if(this.playerPosX <450)
-             {
-             this.playerPosX +=this.playerSpeed;
-            }}
+        if(this.playerPosX <450) {
+        this.playerPosX +=this.playerSpeed; }}
     
+//*all opponent functions**//
+    createOpponent(){
+        this.ctx.fillStyle = "blue";
+        this.ctx.fillRect(this.opponentPositionX, this.opponentPositionY, this.playerSize.w, this.playerSize.h);}
+            
+    opponentMove(){ 
+        this.opponentPositionX += this.opponentSpeed;
+        this.changeDirection();}
+             
+     horizontallyOutOfLimit(){
+        return(this.opponentPositionX<0 || this.opponentPositionX>500) }    
+     changeDirection(){
+         if(this.horizontallyOutOfLimit()){
+                this.opponentSpeed*=-1}}
+
  //**Collission between ball and player */
     collisionBetweenBallandPlayer(){
         
@@ -98,9 +110,17 @@ class Players {
         
         let ballWithinPlayerY = 
         this.playerPosY + this.playerSize.h >this.ballPositionY &&
-        this.playerPosY<this.ballPositionY+this.ballSize.h
+        this.playerPosY<this.ballPositionY+this.ballSize.h;
         
-        this.hasCollided = ballWithinPlayerX && ballWithinPlayerY;
+        let ballWithinOppX = 
+        this.ballPositionX+this.ballSize.w > this.opponentPositionX && 
+        this.ballPositionX <this.opponentPositionX + this.playerSize.w;
+
+        let ballWithinOppY =
+        this.opponentPositionY + this.playerSize.h >this.ballPositionY &&
+        this.opponentPositionY<this.ballPositionY+this.ballSize.h;
+        
+        this.hasCollided = (ballWithinPlayerX && ballWithinPlayerY) || (ballWithinOppX && ballWithinOppY);
         if(this.hasCollided){
             console.log('I have collided')
         }
