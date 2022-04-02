@@ -1,0 +1,175 @@
+body {
+    /* background-color: aliceblue; */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/**splash screen styling*/
+
+#splash-screen{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;  
+}
+
+#heading{
+    border-radius: 10%;
+    width: 50%;
+    height: auto;
+    background: url("./resources/splash\ image.png");
+    background-size: cover;
+}
+#instructions{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left:5%;
+}
+
+#controls{
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+#commands{
+    width:35% ;
+}
+
+#start-btn {
+    margin-top: 25%;
+    margin-bottom: 45%;
+    margin-left: 37%;
+    width: 150px;
+    font-family: monospace;
+    font-size: 1.5rem;
+    color:white ;
+    font-weight: bolder;
+    height: 60px;
+    background-color: black;
+    border: solid 4px #e9f76a;
+    border-radius: 8px;
+    transition: all 200ms ease-in-out;
+  }
+  #start-btn:hover {
+    background-color: #e9f76a;
+  }
+ #game-name{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+h3 {
+    font-size: 1.7rem;
+    padding-left: 10px;
+    margin-bottom: 10px;
+     }
+  
+  h4 {
+    margin: 10px;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    padding-left: 20px;
+  }
+  
+  li {
+    font-size: 1.2rem;
+    padding-left: 10px;
+  }
+  
+  /** game screen styling */
+
+  #game-screen{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #231f20; */
+  }
+  header{
+      display:flex;
+      color: white;
+  }
+  footer{
+      display:flex;
+      color: white;
+  }
+  .canvas-and-button{
+      /* margin: 2%; */
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+  }
+  #game-side{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+  }
+  /*TODO: add transition to move text biger and smaller*/
+  #start-game{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 150px;
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    height: 60px;
+    border: solid 4px #e9f76a;
+    border-radius: 8px;
+    transition: all 200ms ease-in-out;
+  }
+  #start-game:hover {
+    background-color: #e9f76a;
+  }
+  /*TODO Align button text:centered*/
+  #go-back{
+    margin-top: 5%;
+    display: flex;
+    text-align: center; /*? why does not work*/
+    width: 150px;
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    height: 60px;
+    border: solid 4px #e9f76a;
+    border-radius: 8px;
+    transition: all 200ms ease-in-out;
+  }
+  #go-back:hover {
+    background-color: #e9f76a;
+  }
+  /**? With the active class we display the bottons or remove them after event listernet*/
+  .active{
+      display: none;
+  }
+  #restart{
+    display: none;
+    width: 150px;
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    height: 60px;
+    border: solid 4px #e9f76a;
+    border-radius: 8px;
+    transition: all 200ms ease-in-out;
+  }
+  #restart:hover {
+    background-color: #e9f76a;
+  }
+  
+  .game-header{
+      margin-top: 2%;
+  }
+  .game-footer{
+    margin-bottom: 2%;
+  }
+
+  #my-canvas{
+    margin-right: 5%;
+    margin-bottom: 2.5%;
+  }
