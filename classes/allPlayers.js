@@ -2,7 +2,7 @@
 let opponentGoalCounter = document.getElementById('goalsOpponent');
 let playerGoalCounter = document.getElementById('goals')
 class Players {
-    constructor(canvas, ctx, positionX, playerPositionX,oppPosX, frames){
+    constructor(canvas, ctx, positionX, playerPositionX,oppPosX){
         this.canvas =canvas;
         this.ctx = ctx;
         this.ballPositionX  = positionX;
@@ -24,7 +24,6 @@ class Players {
         this.hasCollided = false;
         this.playerGoals =0;
         this.opponentGoals = 0;
-        this.frames = frames;
         this.load()
     }
 //**Ball functions */
@@ -62,14 +61,6 @@ class Players {
 		}}
 
 	horizontallyOutOfBound() {
-        // let horizontallyOut = false;
-		// let ballbellowGoal = (this.ballPositionX  + this.ballSize.w) > this.gameSize.w/4 ||
-        // this.ballPositionX  < 0 ;
-        
-        // //let ballOverGoal = this.ballPositionX>this.gameSize.w/4 && (this.ballPositionX  + this.ballSize.w)<this.gameSize.w
-        // horizontallyOut = ballbellowGoal 
-        // //|| ballOverGoal
-        // return horizontallyOut
         
             let outOfAxisX =  this.ballPositionX  + this.ballSize.w > (this.gameSize.w) ||
                 this.ballPositionX  < 0;
@@ -140,7 +131,7 @@ class Players {
         this.playerPosX -=this.playerSpeed; }}
               
     moveRight(){
-        if(this.playerPosX <450) {
+        if(this.playerPosX <498) {
         this.playerPosX +=this.playerSpeed; }}
     
 //*all opponent functions**//
@@ -183,5 +174,7 @@ class Players {
         }
         return this.hasCollided;
     }
+
+    
 
 }

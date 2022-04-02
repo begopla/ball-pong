@@ -163,13 +163,18 @@ h3 {
   }
   
   .game-header{
-      margin-top: 2%;
+      margin-top: 1%;
+      margin-bottom: 0.5%;
+      font-size: 1.5rem;
+      font-weight: bold;
   }
   .game-footer{
-    margin-bottom: 2%;
+    margin-bottom: 1%;
+    font-size: 1.5rem;
+    font-weight: bold;
   }
-
+  
   #my-canvas{
     margin-right: 5%;
-    margin-bottom: 2.5%;
+    margin-bottom: 0.5%;
   }

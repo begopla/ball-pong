@@ -8,7 +8,6 @@ class Game{
         this.newBackground = null;
        // this.opponent =null;
         this.players=null;
-        this.frames =0;
         this.intervalId = 0;
         this.init()
 
@@ -16,6 +15,7 @@ class Game{
     init(){
         
         console.log('game on')
+        this.reset()
         this.clearBackground()
         //this.createOpponent()
         this.loadPlayers()
@@ -41,11 +41,9 @@ class Game{
     // }
 
     loadPlayers(){
-        this.players = new Players (this.canvas,this.ctx,275, 250,250, this.frames);
+        this.players = new Players (this.canvas,this.ctx,275, 250,250);
     }
     moveAll(){
-        
-        this.frames ++;
         this.clear();
         this.newBackground.draw();
         this.players.createOpponent();
@@ -53,6 +51,7 @@ class Game{
         this.players.randomMove();
         this.players.drawBall();
         this.players.drawPlayer();
+        this.checkScore()
         this.intervalId = requestAnimationFrame(()=>this.moveAll())
     }
     setEventHandlers(){
@@ -66,4 +65,14 @@ class Game{
     clear(){
         this.ctx.clearRect(0, 0, 600, 900)
     }
-}
+    reset(){
+        cancelAnimationFrame(this.intervalId);
+        this.players =null;
+    }
+    checkScore(){
+                    
+           if(opponentGoalCounter.innerHTML >=3||playerGoalCounter.innerHTML>=3)
+           this.reset()
+        }
+    }
+
