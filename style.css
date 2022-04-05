@@ -133,6 +133,7 @@ h3 {
   /*TODO Align button text:centered*/
   #go-back{
     display: block;
+    margin-bottom: 5%;
     text-align: center; /*? why does not work*/
     width: 150px;
     font-family: monospace;
@@ -163,22 +164,28 @@ h3 {
   .winner-text{
     display:none;
   }
-  .active{
+  .inactive{
       display: none;
   }
+  .restart-inactive{
+    display:none;
+  }
+
   #restart{
-    display: none;
+    /* display: none; */
     width: 150px;
     font-family: monospace;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bolder;
     height: 60px;
-    border: solid 4px #e9f76a;
+    border: solid 4px #1a5531;
     border-radius: 8px;
     transition: all 200ms ease-in-out;
   }
   #restart:hover {
-    background-color: #e9f76a;
+    background-color: #4aad41;
+    border: solid 4px #666666;
+    color: white;
   }
   
   .game-header{
@@ -196,4 +203,20 @@ h3 {
   #my-canvas{
     margin-right: 5%;
     margin-bottom: 0.5%;
+  }
+.speed{ 
+    width: 150px;
+    margin-bottom: 5%;
+    font-family: monospace;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    height: 60px;
+    border: solid 4px #1a5531;
+    border-radius: 8px;
+    transition: all 200ms ease-in-out;
+  }
+  .speed:hover {
+    background-color: #4aad41;
+    border: solid 4px #666666;
+    color: white;
   }

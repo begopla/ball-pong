@@ -2,7 +2,7 @@
 let opponentGoalCounter = document.getElementById('goalsOpponent');
 let playerGoalCounter = document.getElementById('goals')
 class Players {
-    constructor(canvas, ctx, positionX, playerPositionX,oppPosX){
+    constructor(canvas, ctx, positionX, playerPositionX,oppPosX,velX,velY){
         this.canvas =canvas;
         this.ctx = ctx;
         this.ballPositionX  = positionX;
@@ -10,8 +10,8 @@ class Players {
         this.ballPositionY =200;
         this.ballSize = {w: 50, h: 50 };
         this.gameSize = {w:600, h:900}
-        this.ballSpeed  = {x:this.getRandVelocity(),
-                            y:this.getRandVelocity(),};
+        this.ballSpeed  = {x:velX,
+                            y:velY,};
         this.playerPosX = playerPositionX;
         this.playerPosY = 700;
         this.playerSize = {w:100 , h:50};
@@ -34,10 +34,7 @@ class Players {
         this.playerImage.src = "./resources/player.png";
     }
 
-    getRandVelocity(){
-        const velocity = [-4,2];
-        return velocity[Math.floor(Math.random()*2)]*(Math.random()*2);
-    }
+    
     drawBall(){
         this.ctx.drawImage(
         this.ball,
@@ -48,7 +45,15 @@ class Players {
             )}
     randomMove(){
        // console.log('changing ball position')
+    
+       gameBallSpeed.addEventListener("click",()=>{
+        this.ballSpeed.y = this.ballSpeed.x +0.055*Math.floor(Math.random()*2);
+        // velocity[;;
+        this.ballSpeed.x = this.ballSpeed.y+0.000001;
+    console.log('increase speed!!!')
+    })
         this.ballPositionX  += this.ballSpeed.x;
+
         this.ballPositionY -= this.ballSpeed.y;
         this.checkCollision()
     }

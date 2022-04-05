@@ -1,8 +1,11 @@
 let splashScreen = document.querySelector('#splash-screen');
 let startButton = document.querySelector("#start-btn");
 let gameScreen = document.querySelector("#game-screen");
-let=startGame = document.querySelector("#start-game");
+let startGame = document.querySelector("#start-game");
 let goBack  = document.querySelector("#go-back");
+const gamePlayerSpeed = document.getElementById("player");
+const gameBallSpeed = document.getElementById("ball");
+const gameRestart = document.querySelector("#restart");
 const gameOverLooser= document.getElementById("looser");
 const gameOverWinner = document.getElementById("winner");
 //*Loading images for the background**/
@@ -58,5 +61,4 @@ startGame.addEventListener("click", () =>{
 
 
    
-
 

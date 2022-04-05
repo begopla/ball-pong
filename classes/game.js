@@ -10,39 +10,29 @@ class Game{
        // this.opponent =null;
         this.players=null;
         this.intervalId = 0;
+        this.velY = 2;
+        this.velX=0.5;
         this.init()
 
     }
     init(){
-        
         console.log('game on')
         this.reset()
         this.clearBackground()
-        //this.createOpponent()
         this.loadPlayers()
         this.moveAll()
         this.setEventHandlers()
+        startGame.classList.add("inactive")
+          
+        
     }
-    
-    
-    
     
     clearBackground(){
         this.newBackground = new Background(this.canvas,this.ctx)
     }
-    // createOpponent(){
-    //     this.opponent = new Opponent(this.canvas,this.ctx,250)
-    //     this.opponent.createOpponent()
-    // }
-    // loadplayer(){
-    //     this.player= new Player(this.canvas,this.ctx,250)
-    //     //this.player.init()
-       
-    //     console.log('player loaded!')
-    // }
 
     loadPlayers(){
-        this.players = new Players (this.canvas,this.ctx,275, 250,250);
+        this.players = new Players (this.canvas,this.ctx,275, 250,250,this.velX,this.velY);
     }
     moveAll(){
         this.clear();
@@ -50,6 +40,7 @@ class Game{
         this.players.createOpponent();
         this.players.opponentMove();
         this.players.randomMove();
+      //  this.players.getVelocity();
         this.players.drawBall();
         this.players.drawPlayer();
         this.checkScore()
@@ -70,11 +61,20 @@ class Game{
         
         cancelAnimationFrame(this.intervalId);
         this.players =null;
+        //this.loadPlayers(); //*!how can I reload the player??
+        //this.players = new Players (this.canvas,this.ctx,275, 250,250);
+        // gameRestart.addEventListener("click", () =>{
+
+        //     new Game(this.canvas,this.ctx);  
+        // }); 
+        
         
     }
     checkScore(){
                     
            if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
+            gameRestart.classList.remove("inactive");
+            
             if(opponentGoalCounter.innerHTML >=1){
                 gameOverLooser.classList.remove("looser-text")
             }
@@ -83,6 +83,10 @@ class Game{
             }
 
             this.reset()
+            return;
+            
+            
+            
            }
         }
     }
