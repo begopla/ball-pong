@@ -1,8 +1,10 @@
 let splashScreen = document.querySelector('#splash-screen');
 let startButton = document.querySelector("#start-btn");
 let gameScreen = document.querySelector("#game-screen");
-let=startGame = document.querySelector("#start-game")
-let goBack  = document.querySelector("#go-back")
+let=startGame = document.querySelector("#start-game");
+let goBack  = document.querySelector("#go-back");
+const gameOverLooser= document.getElementById("looser");
+const gameOverWinner = document.getElementById("winner");
 //*Loading images for the background**/
    
 
@@ -12,7 +14,9 @@ startButton.addEventListener("click", () =>{
     //*?hide splash screen
     splashScreen.style.display = "none";
     gameScreen.style.display = "flex";
+    gameOverWinner.classList.remove("start")
 })
+
 
 goBack.addEventListener("click",()=>{
     splashScreen.style.display = "flex";

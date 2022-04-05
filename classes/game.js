@@ -1,3 +1,4 @@
+
 class Game{
     constructor(canvas,ctx){
         this.canvas = canvas;
@@ -66,13 +67,23 @@ class Game{
         this.ctx.clearRect(0, 0, 600, 900)
     }
     reset(){
+        
         cancelAnimationFrame(this.intervalId);
         this.players =null;
+        
     }
     checkScore(){
                     
-           if(opponentGoalCounter.innerHTML >=3||playerGoalCounter.innerHTML>=3)
-           this.reset()
+           if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
+            if(opponentGoalCounter.innerHTML >=1){
+                gameOverLooser.classList.remove("looser-text")
+            }
+            else if(playerGoalCounter.innerHTML>=1){
+                gameOverWinner.classList.remove("winner-text")
+            }
+
+            this.reset()
+           }
         }
     }
 

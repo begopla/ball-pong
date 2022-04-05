@@ -170,7 +170,7 @@ class Players {
         
         this.hasCollided = (ballWithinPlayerX && ballWithinPlayerY) || (ballWithinOppX && ballWithinOppY);
         if(this.hasCollided){
-            console.log('I have collided')
+            //console.log('I have collided')
         }
         return this.hasCollided;
     }
