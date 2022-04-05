@@ -54,7 +54,7 @@ class Players {
     })
         this.ballPositionX  += this.ballSpeed.x;
 
-        this.ballPositionY -= this.ballSpeed.y;
+        this.ballPositionY += this.ballSpeed.y;
         this.checkCollision()
     }
     checkCollision() {
@@ -130,7 +130,14 @@ class Players {
         this.playerSize.h);
         // this.ctx.fillStyle = "red";
         // this.ctx.fillRect(this.playerPosX, 700, 100, 50);
-     }
+        gamePlayerSpeed.addEventListener("click",()=>{
+           if(this.playerSpeed<7){
+
+               this.playerSpeed += 0.002;
+           }
+        console.log(this.playerSpeed)
+        }) 
+    }
      moveLeft(){
         if(this.playerPosX>0){
         this.playerPosX -=this.playerSpeed; }}

@@ -23,6 +23,7 @@ class Game{
         this.moveAll()
         this.setEventHandlers()
         startGame.classList.add("inactive")
+        
           
         
     }
