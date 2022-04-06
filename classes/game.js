@@ -3,15 +3,13 @@ class Game{
     constructor(canvas,ctx){
         this.canvas = canvas;
         this.ctx = ctx;
-        //this.player = null;
         this.intervalId = 0;
-        //this.playerImage=null;
         this.newBackground = null;
-       // this.opponent =null;
         this.players=null;
         this.intervalId = 0;
         this.velY = 2;
         this.velX=0.5;
+        this.gameOver = false;
         this.init()
 
     }
@@ -41,11 +39,17 @@ class Game{
         this.players.createOpponent();
         this.players.opponentMove();
         this.players.randomMove();
-      //  this.players.getVelocity();
         this.players.drawBall();
         this.players.drawPlayer();
         this.checkScore()
+        if(this.checkScore()){
+            console.log('one of the players won');
+            this.reset();
+            return;
+        }
         this.intervalId = requestAnimationFrame(()=>this.moveAll())
+        
+
     }
     setEventHandlers(){
     document.addEventListener('keydown', (event)=>{
@@ -61,33 +65,25 @@ class Game{
     reset(){
         
         cancelAnimationFrame(this.intervalId);
+        this.newBackground = null;
         this.players =null;
-        //this.loadPlayers(); //*!how can I reload the player??
-        //this.players = new Players (this.canvas,this.ctx,275, 250,250);
-        // gameRestart.addEventListener("click", () =>{
-
-        //     new Game(this.canvas,this.ctx);  
-        // }); 
-        
+        this.gameOver = false;
+         
         
     }
-    checkScore(){
-                    
+    checkScore(){      
            if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
-            gameRestart.classList.remove("inactive");
-            
-            if(opponentGoalCounter.innerHTML >=1){
+             gameRestart.classList.remove("inactive");
+
+                if(opponentGoalCounter.innerHTML >=1){
                 gameOverLooser.classList.remove("looser-text")
             }
-            else if(playerGoalCounter.innerHTML>=1){
+                else if(playerGoalCounter.innerHTML>=1){
                 gameOverWinner.classList.remove("winner-text")
             }
+            this.gameOver = true;
 
-            this.reset()
-            return;
-            
-            
-            
+           return this.gameOver;
            }
         }
     }

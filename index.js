@@ -59,6 +59,19 @@ startGame.addEventListener("click", () =>{
 
 });    
 
+gameRestart.addEventListener("click", () =>{
 
+//reset game scores & remove winner/looser text
+if(opponentGoalCounter.innerHTML >=1){
+    opponentGoalCounter.innerHTML = 0;
+    gameOverLooser.classList.add("looser-text")
+}
+else if(playerGoalCounter.innerHTML>=1){
+    playerGoalCounter.innerHTML =0;
+    gameOverWinner.classList.add("winner-text")
+}
+
+    new Game(canvas,ctx);  
+}); 
    
 
