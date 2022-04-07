@@ -3,11 +3,12 @@ let startButton = document.querySelector("#start-btn");
 let gameScreen = document.querySelector("#game-screen");
 let startGame = document.querySelector("#start-game");
 let goBack  = document.querySelector("#go-back");
-const gamePlayerSpeed = document.getElementById("player");
-const gameBallSpeed = document.getElementById("ball");
+const gamePlayerSpeed = document.querySelector("#player");
+const gameBallSpeed = document.querySelector("#ball");
 const gameRestart = document.querySelector("#restart");
 const gameOverLooser= document.getElementById("looser");
 const gameOverWinner = document.getElementById("winner");
+const increaseGameLevel = document.querySelector("#difficult-game")
 //*Loading images for the background**/
    
 
@@ -71,6 +72,11 @@ else if(playerGoalCounter.innerHTML>=1){
     gameOverWinner.classList.add("winner-text")
 }
 
+//enable speed bottons
+gameBallSpeed.classList.remove("inactive");
+gamePlayerSpeed.classList.remove("inactive")
+//remove Play Again botton
+gameRestart.classList.add("inactive")
     new Game(canvas,ctx);  
 }); 
    

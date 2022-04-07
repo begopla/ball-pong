@@ -172,7 +172,7 @@ h3 {
   }
 
   #restart{
-    /* display: none; */
+    margin-bottom: 5%;
     width: 150px;
     font-family: monospace;
     font-size: 1.3rem;
@@ -206,7 +206,8 @@ h3 {
   }
 .speed{ 
     width: 150px;
-    margin-bottom: 5%;
+    margin-top: 10%;
+    /* margin-bottom: 5%; */
     font-family: monospace;
     font-size: 1.3rem;
     font-weight: bolder;
@@ -219,4 +220,22 @@ h3 {
     background-color: #4aad41;
     border: solid 4px #666666;
     color: white;
+  }
+  #difficult-game{
+    margin-top: 5%;
+    width: 150px;
+    font-family: monospace;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    height: 60px;
+    border: solid 4px #1a5531;
+    border-radius: 8px;
+    transition: all 200ms ease-in-out;
+  }
+  #difficult-game:hover{
+    
+      background-color: #4aad41;
+      border: solid 4px #666666;
+      color: white;
+    
   }

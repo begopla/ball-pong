@@ -7,7 +7,7 @@ class Players {
         this.ctx = ctx;
         this.ballPositionX  = positionX;
         this.ball=null; 
-        this.ballPositionY =200;
+        this.ballPositionY =240;
         this.ballSize = {w: 50, h: 50 };
         this.gameSize = {w:600, h:900}
         this.ballSpeed  = {x:velX,
@@ -24,6 +24,7 @@ class Players {
         this.hasCollided = false;
         this.playerGoals =0;
         this.opponentGoals = 0;
+        this.audioBong =null;
         this.load()
     }
 //**Ball functions */
@@ -32,6 +33,8 @@ class Players {
         this.ball.src = "./resources/soccer-ball.png";
         this.playerImage = new Image();
         this.playerImage.src = "./resources/player.png";
+        this.audio = new Audio();
+        this.audio.src = "./resources/ping-pong-hit.mp3";
     }
 
     
@@ -47,19 +50,29 @@ class Players {
        // console.log('changing ball position')
     
        gameBallSpeed.addEventListener("click",()=>{
-        this.ballSpeed.y = this.ballSpeed.x +0.055*Math.floor(Math.random()*2);
-        // velocity[;;
-        this.ballSpeed.x = this.ballSpeed.y+0.000001;
-    console.log('increase speed!!!')
-    })
-        this.ballPositionX  += this.ballSpeed.x;
+        this.ballSpeed.y = this.ballSpeed.y +0.01*Math.floor(Math.random()*2);
+       
+        this.ballSpeed.x = this.ballSpeed.x+0.0000001;
 
-        this.ballPositionY += this.ballSpeed.y;
+        
+   // console.log('increase speed!!!')
+    })
+        this.ballPositionX  -= this.ballSpeed.x;
+
+        this.ballPositionY -= this.ballSpeed.y;
+        if(this.collisionBetweenBallandPlayer()&&this.ballSpeed.y<4){
+            this.ballPositionX = this.ballPositionX -0.5*this.ballSpeed.x;
+            this.ballPositionY = this.ballPositionY -2*this.ballSpeed.y;
+        }
         this.checkCollision()
+        
     }
     checkCollision() {
 		if (this.horizontallyOutOfBound()||this.collisionBetweenBallandPlayer()) {
-			this.ballSpeed.x *= -1;}
+			this.ballSpeed.x *= -1;
+            this.audio.play();
+        }
+            
 
 		if (this.verticallyOutOfBound()||this.collisionBetweenBallandPlayer()) {
 			this.ballSpeed.y *= -1;
@@ -135,12 +148,13 @@ class Players {
 
                this.playerSpeed += 0.002;
            }
-        console.log(this.playerSpeed)
+        //console.log(this.playerSpeed)
         }) 
     }
      moveLeft(){
         if(this.playerPosX>0){
         this.playerPosX -=this.playerSpeed; }}
+        
               
     moveRight(){
         if(this.playerPosX <498) {
@@ -152,11 +166,38 @@ class Players {
         this.ctx.fillRect(this.opponentPositionX, this.opponentPositionY, this.playerSize.w, this.playerSize.h);}
             
     opponentMove(){ 
-        this.opponentPositionX += this.opponentSpeed;
-        this.changeDirection();}
-             
+    
+               
+        if(this.ballPositionX>this.gameSize.w/2 && this.ballPositionY <this.gameSize.h/2){
+            if(this.opponentPositionX>this.gameSize.w*0.3 &&(this.opponentPositionX+this.playerSize.w)<this.gameSize.w*0.65){
+            this.opponentPositionX =this.opponentPositionX;
+            
+            }
+           else{
+            this.opponentPositionX += this.opponentSpeed;
+               this.changeDirection();
+           }
+         }
+         else if(this.ballPositionX<this.gameSize.w/2 && this.ballPositionY <this.gameSize.h/2){
+            if(this.opponentPositionX>this.gameSize.w*0.3 &&(this.opponentPositionX+this.playerSize.w)<this.gameSize.w*0.65){
+                this.opponentPositionX =this.opponentPositionX;
+                
+                }
+                else{
+                    this.opponentPositionX += this.opponentSpeed;
+                       this.changeDirection();
+                   }
+        }   
+         
+         else{
+
+             this.opponentPositionX += this.opponentSpeed;
+             this.changeDirection();  
+         }
+    }
+            
      horizontallyOutOfLimit(){
-        return(this.opponentPositionX<0 || this.opponentPositionX>500) }    
+        return(this.opponentPositionX<this.gameSize.w*0.1 || this.opponentPositionX>this.gameSize.w*0.8) }    
      changeDirection(){
          if(this.horizontallyOutOfLimit()){
                 this.opponentSpeed*=-1}}
@@ -165,20 +206,20 @@ class Players {
     collisionBetweenBallandPlayer(){
         
         let ballWithinPlayerX = 
-        this.ballPositionX+this.ballSize.w > this.playerPosX && 
-        this.ballPositionX <this.playerPosX + this.playerSize.w;
+        this.ballPositionX+this.ballSize.w >= this.playerPosX && 
+        this.ballPositionX <=this.playerPosX + this.playerSize.w;
         
         let ballWithinPlayerY = 
-        this.playerPosY + this.playerSize.h >this.ballPositionY &&
-        this.playerPosY<this.ballPositionY+this.ballSize.h;
+        this.playerPosY + this.playerSize.h >=this.ballPositionY &&
+        this.playerPosY<=this.ballPositionY+this.ballSize.h;
         
         let ballWithinOppX = 
-        this.ballPositionX+this.ballSize.w > this.opponentPositionX && 
-        this.ballPositionX <this.opponentPositionX + this.playerSize.w;
+        this.ballPositionX+this.ballSize.w+5 >= this.opponentPositionX && 
+        this.ballPositionX <=this.opponentPositionX + this.playerSize.w+5;
 
         let ballWithinOppY =
-        this.opponentPositionY + this.playerSize.h >this.ballPositionY &&
-        this.opponentPositionY<this.ballPositionY+this.ballSize.h;
+        this.opponentPositionY + this.playerSize.h+10 >=this.ballPositionY &&
+        this.opponentPositionY<=this.ballPositionY+this.ballSize.h+5;
         
         this.hasCollided = (ballWithinPlayerX && ballWithinPlayerY) || (ballWithinOppX && ballWithinOppY);
         if(this.hasCollided){

@@ -7,9 +7,12 @@ class Game{
         this.newBackground = null;
         this.players=null;
         this.intervalId = 0;
-        this.velY = 2;
+        this.velY = 2.5;
         this.velX=0.5;
         this.gameOver = false;
+        this.looserSound = null;
+        this.winnerSound = null;
+       
         this.init()
 
     }
@@ -32,6 +35,10 @@ class Game{
 
     loadPlayers(){
         this.players = new Players (this.canvas,this.ctx,275, 250,250,this.velX,this.velY);
+        this.looserSound =new Audio();
+        this.looserSound.src = "./resources/looser-sound.mp3";
+        this.winnerSound = new Audio();
+        this.winnerSound.src ="./resources/winner-sound.mp3";
     }
     moveAll(){
         this.clear();
@@ -74,12 +81,17 @@ class Game{
     checkScore(){      
            if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
              gameRestart.classList.remove("inactive");
+             gameBallSpeed.classList.add("inactive");
+             gamePlayerSpeed.classList.add("inactive")
+
 
                 if(opponentGoalCounter.innerHTML >=1){
                 gameOverLooser.classList.remove("looser-text")
+                this.looserSound.play();
             }
                 else if(playerGoalCounter.innerHTML>=1){
                 gameOverWinner.classList.remove("winner-text")
+                this.winnerSound.play();
             }
             this.gameOver = true;
 
