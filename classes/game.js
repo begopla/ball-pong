@@ -13,6 +13,7 @@ class Game{
         this.looserSound = null;
         this.winnerSound = null;
         this.frame = 0;
+        this.secondCounter =0;
        
         this.init()
 
@@ -43,6 +44,8 @@ class Game{
        
     }
     moveAll(){
+        this.frames ++;
+        //console.log(this.frames);
         this.clear();
         this.newBackground.draw();
         this.players.createOpponent();
@@ -50,12 +53,19 @@ class Game{
         this.players.randomMove();
         this.players.drawBall();
         this.players.drawPlayer();
-        this.checkScore()
+        this.updateTimer();
+        this.checkScore();
         if(this.checkScore()){
-            console.log('one of the players won');
+            //console.log('one of the players won');
             this.reset();
             return;
         }
+        this.timerEndGame();
+        if(this.timerEndGame()){
+            this.reset();
+            return;
+        }
+        
         this.intervalId = requestAnimationFrame(()=>this.moveAll())
         
 
@@ -77,14 +87,15 @@ class Game{
         this.newBackground = null;
         this.players =null;
         this.gameOver = false;
+        this.frames = 0;
          
         
     }
     checkScore(){      
            if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
             gameRestart.classList.remove("inactive");
-             gameBallSpeed.classList.add("inactive");
-             gamePlayerSpeed.classList.add("inactive")
+            gameBallSpeed.classList.add("inactive");
+            gamePlayerSpeed.classList.add("inactive");
 
 
                 if(opponentGoalCounter.innerHTML >=1){
@@ -99,6 +110,28 @@ class Game{
 
            return this.gameOver;
            }
+        }
+        updateTimer(){
+           this.secondCounter;
+            if(this.frames%60 === 0){
+               // console.log("A second has passed")
+                this.secondCounter++;
+                
+                timer.innerHTML=(60-this.secondCounter);
+            }
+        }
+        timerEndGame(){
+             //let secondCounter = 0;
+             
+            if(this.frames >=3600){
+            gameRestart.classList.remove("inactive");
+            gameBallSpeed.classList.add("inactive");
+            gamePlayerSpeed.classList.add("inactive");
+            gameOverLooser.classList.remove("looser-text");
+            this.looserSound.play();
+                return true;
+            
+            }
         }
     }
 

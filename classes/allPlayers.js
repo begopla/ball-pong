@@ -143,14 +143,13 @@ class Players {
         this.playerPosY,
         this.playerSize.w,
         this.playerSize.h);
-        // this.ctx.fillStyle = "red";
-        // this.ctx.fillRect(this.playerPosX, 700, 100, 50);
+        
         gamePlayerSpeed.addEventListener("click",()=>{
            if(this.playerSpeed<7){
 
                this.playerSpeed += 0.002;
+               console.log(this.playerSpeed)
            }
-        //console.log(this.playerSpeed)
         }) 
     }
      moveLeft(){

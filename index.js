@@ -9,7 +9,7 @@ const gameRestart = document.querySelector("#restart");
 const gameOverLooser= document.getElementById("looser");
 const gameOverWinner = document.getElementById("winner");
 const increaseGameLevel = document.querySelector("#difficult-game")
-let timer =document.getElementById("#count-down")
+const timer =document.getElementById("count-down")
 //*Loading images for the background**/
    
 
@@ -57,7 +57,7 @@ let ctx = canvas.getContext("2d");
 //** Start the game on canvas by typing any key **/
 startGame.addEventListener("click", () =>{
    
-  let aNewGame =  new Game(canvas,ctx);  
+   new Game(canvas,ctx);  
 
 });    
 
@@ -73,6 +73,11 @@ else if(playerGoalCounter.innerHTML>=1){
     playerGoalCounter.innerHTML =0;
     gameOverWinner.classList.add("winner-text")
 }
+if(timer.innerHTML <60){
+    timer.innerHTML =60;
+    gameOverLooser.classList.add("looser-text")
+}
+
 
 //enable speed bottons
 gameBallSpeed.classList.remove("inactive");
