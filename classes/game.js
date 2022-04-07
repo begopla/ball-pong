@@ -7,11 +7,12 @@ class Game{
         this.newBackground = null;
         this.players=null;
         this.intervalId = 0;
-        this.velY = 2.5;
-        this.velX=0.5;
+        this.velY = 3;
+        this.velX=0.6;
         this.gameOver = false;
         this.looserSound = null;
         this.winnerSound = null;
+        this.frame = 0;
        
         this.init()
 
@@ -39,6 +40,7 @@ class Game{
         this.looserSound.src = "./resources/looser-sound.mp3";
         this.winnerSound = new Audio();
         this.winnerSound.src ="./resources/winner-sound.mp3";
+       
     }
     moveAll(){
         this.clear();
@@ -80,7 +82,7 @@ class Game{
     }
     checkScore(){      
            if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
-             gameRestart.classList.remove("inactive");
+            gameRestart.classList.remove("inactive");
              gameBallSpeed.classList.add("inactive");
              gamePlayerSpeed.classList.add("inactive")
 

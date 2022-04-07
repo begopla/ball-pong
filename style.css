@@ -92,6 +92,7 @@ h3 {
     align-items: center;
     background-color: #231f20; 
   }
+  
   header{
       display:flex;
       color: white;
@@ -111,7 +112,7 @@ h3 {
       flex-direction: column;
       justify-content: space-around;
   }
-  /*TODO: add transition to move text biger and smaller*/
+
   #start-game{
     margin-top: 5%;
     margin-bottom: 10%;
@@ -189,16 +190,27 @@ h3 {
   }
   
   .game-header{
+    width: 22%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
       margin-top: 1%;
       margin-bottom: 0.5%;
       font-size: 1.5rem;
       font-weight: bold;
   }
+  .timer{
+    margin-right: 5%;
+  }
+
   .game-footer{
     margin-bottom: 1%;
     font-size: 1.5rem;
     font-weight: bold;
   }
+  /* .score-board{
+    margin-left: 5%;
+  } */
   
   #my-canvas{
     margin-right: 5%;

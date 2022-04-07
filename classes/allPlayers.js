@@ -50,10 +50,11 @@ class Players {
        // console.log('changing ball position')
     
        gameBallSpeed.addEventListener("click",()=>{
-        this.ballSpeed.y = this.ballSpeed.y +0.01*Math.floor(Math.random()*2);
+           
+        this.ballSpeed.y = this.ballSpeed.y +0.005*Math.floor(Math.random()*2);
        
-        this.ballSpeed.x = this.ballSpeed.x+0.0000001;
-
+        this.ballSpeed.x = this.ballSpeed.x+0.00000005;
+        this.checkCollision()
         
    // console.log('increase speed!!!')
     })
@@ -61,8 +62,8 @@ class Players {
 
         this.ballPositionY -= this.ballSpeed.y;
         if(this.collisionBetweenBallandPlayer()&&this.ballSpeed.y<4){
-            this.ballPositionX = this.ballPositionX -0.5*this.ballSpeed.x;
-            this.ballPositionY = this.ballPositionY -2*this.ballSpeed.y;
+            this.ballPositionX = this.ballPositionX -0.6*this.ballSpeed.x;
+            this.ballPositionY = this.ballPositionY -2.5*this.ballSpeed.y;
         }
         this.checkCollision()
         
@@ -70,6 +71,7 @@ class Players {
     checkCollision() {
 		if (this.horizontallyOutOfBound()||this.collisionBetweenBallandPlayer()) {
 			this.ballSpeed.x *= -1;
+           
             this.audio.play();
         }
             
@@ -168,7 +170,7 @@ class Players {
     opponentMove(){ 
     
                
-        if(this.ballPositionX>this.gameSize.w/2 && this.ballPositionY <this.gameSize.h/2){
+        if(this.ballPositionX>this.gameSize.w/2 && this.ballPositionY <this.gameSize.h*0.4){
             if(this.opponentPositionX>this.gameSize.w*0.3 &&(this.opponentPositionX+this.playerSize.w)<this.gameSize.w*0.65){
             this.opponentPositionX =this.opponentPositionX;
             
