@@ -7,8 +7,8 @@ class Game{
         this.newBackground = null;
         this.players=null;
         this.intervalId = 0;
-        this.velY = 3;
-        this.velX=0.6;
+        this.velY = 3.5;
+        this.velX=0.7;
         this.gameOver = false;
         this.looserSound = null;
         this.winnerSound = null;
@@ -25,10 +25,7 @@ class Game{
         this.loadPlayers()
         this.moveAll()
         this.setEventHandlers()
-        startGame.classList.add("inactive")
-        
-          
-        
+        startGame.classList.add("inactive")  
     }
     
     clearBackground(){
@@ -40,8 +37,7 @@ class Game{
         this.looserSound =new Audio();
         this.looserSound.src = "./resources/looser-sound.mp3";
         this.winnerSound = new Audio();
-        this.winnerSound.src ="./resources/winner-sound.mp3";
-       
+        this.winnerSound.src ="./resources/winner-sound.mp3";   
     }
     moveAll(){
         this.frames ++;
@@ -66,9 +62,7 @@ class Game{
             return;
         }
         
-        this.intervalId = requestAnimationFrame(()=>this.moveAll())
-        
-
+        this.intervalId = requestAnimationFrame(()=>this.moveAll())   
     }
     setEventHandlers(){
     document.addEventListener('keydown', (event)=>{
@@ -87,9 +81,7 @@ class Game{
         this.newBackground = null;
         this.players =null;
         this.gameOver = false;
-        this.frames = 0;
-         
-        
+        this.frames = 0;   
     }
     checkScore(){      
            if(opponentGoalCounter.innerHTML >=1||playerGoalCounter.innerHTML>=1){
@@ -98,40 +90,35 @@ class Game{
             gamePlayerSpeed.classList.add("inactive");
 
 
-                if(opponentGoalCounter.innerHTML >=1){
+              if(opponentGoalCounter.innerHTML >=1){
                 gameOverLooser.classList.remove("looser-text")
                 this.looserSound.play();
-            }
-                else if(playerGoalCounter.innerHTML>=1){
+             }
+               else if(playerGoalCounter.innerHTML>=1){
                 gameOverWinner.classList.remove("winner-text")
                 this.winnerSound.play();
-            }
+             }
             this.gameOver = true;
 
            return this.gameOver;
            }
-        }
-        updateTimer(){
-           this.secondCounter;
+    }
+    updateTimer(){
+        this.secondCounter;
             if(this.frames%60 === 0){
                // console.log("A second has passed")
                 this.secondCounter++;
-                
                 timer.innerHTML=(60-this.secondCounter);
             }
-        }
-        timerEndGame(){
-             //let secondCounter = 0;
-             
-            if(this.frames >=3600){
+    }
+    timerEndGame(){      
+        if(this.frames >=3600){
             gameRestart.classList.remove("inactive");
             gameBallSpeed.classList.add("inactive");
             gamePlayerSpeed.classList.add("inactive");
             gameOverLooser.classList.remove("looser-text");
             this.looserSound.play();
-                return true;
-            
-            }
-        }
+                return true;}
     }
+}
 

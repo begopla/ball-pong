@@ -13,7 +13,7 @@ const timer =document.getElementById("count-down")
 //*Loading images for the background**/
    
 
-    //Changing screens
+//Changing screens
 
 startButton.addEventListener("click", () =>{
     //*?hide splash screen
@@ -54,36 +54,36 @@ let ctx = canvas.getContext("2d");
     }
   
     
-//** Start the game on canvas by typing any key **/
+//** Start the game on canvas by clicking on Start Game botton **/
 startGame.addEventListener("click", () =>{
    
    new Game(canvas,ctx);  
 
 });    
-
+//** Re-start the game on canvas after game over by clicking on Play Again botton  **/
 gameRestart.addEventListener("click", () =>{
 
 
 //reset game scores & remove winner/looser text
-if(opponentGoalCounter.innerHTML >=1){
-    opponentGoalCounter.innerHTML = 0;
-    gameOverLooser.classList.add("looser-text")
-}
-else if(playerGoalCounter.innerHTML>=1){
-    playerGoalCounter.innerHTML =0;
-    gameOverWinner.classList.add("winner-text")
-}
-if(timer.innerHTML <60){
-    timer.innerHTML =60;
-    gameOverLooser.classList.add("looser-text")
-}
+    if(opponentGoalCounter.innerHTML >=1){
+        opponentGoalCounter.innerHTML = 0;
+        gameOverLooser.classList.add("looser-text")
+    }
+    else if(playerGoalCounter.innerHTML>=1){
+        playerGoalCounter.innerHTML =0;
+        gameOverWinner.classList.add("winner-text")
+    }
+    if(timer.innerHTML <60){
+        timer.innerHTML =60;
+        gameOverLooser.classList.add("looser-text")
+    }
 
 
-//enable speed bottons
-gameBallSpeed.classList.remove("inactive");
-gamePlayerSpeed.classList.remove("inactive")
+ //enable speed bottons
+    gameBallSpeed.classList.remove("inactive");
+    gamePlayerSpeed.classList.remove("inactive")
 
 //remove Play Again botton
- gameRestart.classList.add("inactive")
-    new Game(canvas,ctx);  
+    gameRestart.classList.add("inactive")
+        new Game(canvas,ctx);  
 }); 

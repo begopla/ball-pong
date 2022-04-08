@@ -37,45 +37,40 @@ class Players {
         this.audio.src = "./resources/ping-pong-hit.mp3";
     }
 
-    
     drawBall(){
         this.ctx.drawImage(
         this.ball,
         this.ballPositionX,
-        this.ballPositionY ,
+        this.ballPositionY,
         this.ballSize.w,
         this.ballSize.h
             )}
     randomMove(){
-       // console.log('changing ball position')
-    
-       gameBallSpeed.addEventListener("click",()=>{
-           
-        this.ballSpeed.y = this.ballSpeed.y +0.005*Math.floor(Math.random()*2);
        
+    /*ramdomly changes ball speed after cliking ball speed button*/   
+       gameBallSpeed.addEventListener("click",()=>{
+        this.ballSpeed.y = this.ballSpeed.y +0.005*Math.floor(Math.random()*2);
         this.ballSpeed.x = this.ballSpeed.x+0.00000005;
         this.checkCollision()
-        
-   // console.log('increase speed!!!')
     })
         this.ballPositionX  -= this.ballSpeed.x;
-
         this.ballPositionY -= this.ballSpeed.y;
+    /*if the ball collides on the game boundaries or players, aceelerates the ball*/
         if(this.collisionBetweenBallandPlayer()&&this.ballSpeed.y<4){
             this.ballPositionX = this.ballPositionX -0.6*this.ballSpeed.x;
             this.ballPositionY = this.ballPositionY -2.5*this.ballSpeed.y;
         }
+    /*if the ball collides against game boundaries or players, changes ball direccion*/
         this.checkCollision()
         
     }
     checkCollision() {
 		if (this.horizontallyOutOfBound()||this.collisionBetweenBallandPlayer()) {
 			this.ballSpeed.x *= -1;
-           
+           /*plays boing audio when bouncing agains walls or players*/
             this.audio.play();
         }
             
-
 		if (this.verticallyOutOfBound()||this.collisionBetweenBallandPlayer()) {
 			this.ballSpeed.y *= -1;
 		}}
@@ -85,16 +80,14 @@ class Players {
             let outOfAxisX =  this.ballPositionX  + this.ballSize.w > (this.gameSize.w) ||
                 this.ballPositionX  < 0;
 
-            return outOfAxisX;
-            
-        
+            return outOfAxisX;  
     }
     verticallyOutOfBound(){
         
        let outOfAxisY = this.ballPositionY<72 ||
         this.ballPositionY + this.ballSize.h >(this.gameSize.h-73)
 
-         if(this.ballPositionX>0 && (this.ballPositionX+this.ballSize.w) <this.gameSize.w/3)
+        if(this.ballPositionX>0 && (this.ballPositionX+this.ballSize.w) <this.gameSize.w/3)
          return outOfAxisY;
 
         else if( this.ballPositionX>this.gameSize.w*(2/3) && (this.ballPositionX+this.ballSize.w)<this.gameSize.w)
@@ -125,14 +118,9 @@ class Players {
                    this.playerPosY=700;
                    this.opponentPositionX =250;
                    this.opponentPositionY= 150;
-    
             }
-
         }
     }
-
-    
-
 
  //*player functions*//
     
@@ -149,10 +137,9 @@ class Players {
 
                this.playerSpeed += 0.002;
                console.log(this.playerSpeed)
-           }
-        }) 
+           } }) 
     }
-     moveLeft(){
+    moveLeft(){
         if(this.playerPosX>0){
         this.playerPosX -=this.playerSpeed; }}
         
@@ -166,42 +153,36 @@ class Players {
         this.ctx.fillStyle = "blue";
         this.ctx.fillRect(this.opponentPositionX, this.opponentPositionY, this.playerSize.w, this.playerSize.h);}
             
-    opponentMove(){ 
-    
-               
+    opponentMove(){      
         if(this.ballPositionX>this.gameSize.w/2 && this.ballPositionY <this.gameSize.h*0.4){
-            if(this.opponentPositionX>this.gameSize.w*0.3 &&(this.opponentPositionX+this.playerSize.w)<this.gameSize.w*0.65){
+           if(this.opponentPositionX>this.gameSize.w*0.3 &&(this.opponentPositionX+this.playerSize.w)<this.gameSize.w*0.65){
             this.opponentPositionX =this.opponentPositionX;
-            
-            }
+             }
            else{
             this.opponentPositionX += this.opponentSpeed;
-               this.changeDirection();
+            this.changeDirection();
            }
-         }
-         else if(this.ballPositionX<this.gameSize.w/2 && this.ballPositionY <this.gameSize.h/2){
+        }
+        else if(this.ballPositionX<this.gameSize.w/2 && this.ballPositionY <this.gameSize.h/2){
             if(this.opponentPositionX>this.gameSize.w*0.3 &&(this.opponentPositionX+this.playerSize.w)<this.gameSize.w*0.65){
                 this.opponentPositionX =this.opponentPositionX;
-                
                 }
-                else{
-                    this.opponentPositionX += this.opponentSpeed;
-                       this.changeDirection();
-                   }
-        }   
-         
-         else{
-
+            else{
+                this.opponentPositionX += this.opponentSpeed;
+                this.changeDirection();
+                }
+        }    
+        else{
              this.opponentPositionX += this.opponentSpeed;
              this.changeDirection();  
-         }
+        }
     }
             
-     horizontallyOutOfLimit(){
+    horizontallyOutOfLimit(){
         return(this.opponentPositionX<this.gameSize.w*0.1 || this.opponentPositionX>this.gameSize.w*0.8) }    
-     changeDirection(){
+             changeDirection(){
          if(this.horizontallyOutOfLimit()){
-                this.opponentSpeed*=-1}}
+             this.opponentSpeed*=-1}}
 
  //**Collission between ball and player */
     collisionBetweenBallandPlayer(){
@@ -228,7 +209,5 @@ class Players {
         }
         return this.hasCollided;
     }
-
-    
 
 }
